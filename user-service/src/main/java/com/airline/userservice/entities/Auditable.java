@@ -1,10 +1,15 @@
 package com.airline.userservice.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Data
@@ -12,8 +17,16 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public abstract class Auditable {
-  private Date createdBy;
-  private Date updatedBy;
-  private Date creationDate;
-  private Date updateDate;
+  @CreatedBy
+  protected String createdBy;
+
+  @CreatedDate
+  @Column(nullable = false, updatable = false)
+  protected LocalDateTime createdDate;
+
+  @LastModifiedBy
+  protected String lastModifiedBy;
+
+  @LastModifiedDate
+  protected LocalDateTime lastModifiedDate;
 }
