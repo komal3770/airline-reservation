@@ -4,27 +4,27 @@ server:
 spring:
   application:
     name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      mvc:
+        routes:
+          - id: flight-service
+            uri: http://localhost:8082
+            predicates:
+              - Path=/flights/**
 
 eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
-    serviceUrl:
+    service-url:
       defaultZone: http://localhost:8761/eureka/
-
-gateway:
-  discovery:
-    locator:
-      enabled: true
-      lower-case-service-id: true
-
-  routes:
-    - id: user-service-route
-      uri: lb://user-service
-      predicates:
-        - Path=/users/**
-      filters:
-        - RewritePath=/users/(?<segment>.*), /$\{segment}
+  instance:
+    hostname: localhost
 
 logging:
   level:
