@@ -18,14 +18,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @MappedSuperclass
 public abstract class Auditable {
   @CreatedBy
-  protected String createdBy;
+  protected Long createdBy;
 
   @CreatedDate
   @Column(nullable = false, updatable = false)
   protected LocalDateTime createdDate;
 
   @LastModifiedBy
-  protected String lastModifiedBy;
+  protected Long lastModifiedBy;
 
   @LastModifiedDate
   protected LocalDateTime lastModifiedDate;
