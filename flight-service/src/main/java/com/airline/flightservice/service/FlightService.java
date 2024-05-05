@@ -8,4 +8,8 @@ import org.springframework.stereotype.Service;
 public class FlightService {
     @Autowired
     FlightRepository flightRepository;
+
+    public void save(){
+
+    }
 }
