@@ -4,14 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @Entity
-public class User {
+public class User extends CommonProps {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +19,4 @@ public class User {
   private String firstName;
   private String lastName;
   private Integer age;
-  private Date createdAt;
-  private Date updatedAt;
 }
