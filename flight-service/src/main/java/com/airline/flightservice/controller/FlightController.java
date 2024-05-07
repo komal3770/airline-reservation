@@ -14,18 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/flights")
 public class FlightController {
-    @Autowired
-    FlightService flightService;
+  @Autowired FlightService flightService;
 
-    @PostMapping
-    public ResponseEntity<?> addFlight(@Valid FlightRequest flightRequest){
-        flightService.save(flightRequest);
-        return ResponseEntity.status(HttpStatus.SC_CREATED).build();
-    }
+  @PostMapping
+  public ResponseEntity<?> addFlight(@Valid FlightRequest flightRequest) {
+    flightService.save(flightRequest);
+    return ResponseEntity.status(HttpStatus.SC_CREATED).build();
+  }
 
-    @GetMapping
-    public ResponseEntity<?> getAllFlights(){
-        System.out.println("Inside get all flight");
-        return ResponseEntity.ok(flightService.findAll());
-    }
+  @GetMapping
+  public ResponseEntity<?> getAllFlights() {
+    return ResponseEntity.ok(flightService.findAll());
+  }
 }

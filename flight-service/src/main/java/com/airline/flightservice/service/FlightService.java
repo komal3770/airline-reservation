@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class FlightService {
   @Autowired FlightRepository flightRepository;
 
+  @Autowired AirportService airportService;
+
   public void save(FlightRequest flightRequest) {
     Flight flight = toData(flightRequest);
     flightRepository.save(flight);
@@ -25,9 +27,13 @@ public class FlightService {
 
   public Flight toData(FlightRequest flightRequest) {
     Airport source = null, destination = null;
-    if (flightRequest.getSourceAirportId() != null) {}
+    if (flightRequest.getSourceAirportId() != null) {
+      source = airportService.findById(flightRequest.getSourceAirportId()).orElseThrow();
+    }
 
-    if (flightRequest.getDestinationAirportId() != null) {}
+    if (flightRequest.getDestinationAirportId() != null) {
+      destination = airportService.findById(flightRequest.getDestinationAirportId()).orElseThrow();
+    }
 
     return Flight.builder()
         .capacity(flightRequest.getCapacity())
